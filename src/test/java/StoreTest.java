@@ -1,5 +1,3 @@
-package challenge.repository;
-
 import challenge.repository.InMemoryHistoryStore;
 import challenge.repository.Store;
 import challenge.service.DataStoreService;
@@ -9,7 +7,39 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class InMemoryHistoryStoreTest {
+public class StoreTest {
+
+    @Test
+    public void validateInput() throws Exception {
+        Store store = new InMemoryHistoryStore();
+        DataStoreService storeService = new DataStoreServiceImpl(store);
+
+        assertEquals("OK 1.5", storeService.create(0, 100, "1.5"));
+    }
+
+    @Test(expected = Exception.class)
+    public void validateInputWrongIDRangeException() throws Exception {
+        Store store = new InMemoryHistoryStore();
+        DataStoreService storeService = new DataStoreServiceImpl(store);
+
+        assertEquals("OK 1.5", storeService.create(-1, 100, "1.5"));
+    }
+
+    @Test(expected = Exception.class)
+    public void validateInputWrongTimeStampRangeException() throws Exception {
+        Store store = new InMemoryHistoryStore();
+        DataStoreService storeService = new DataStoreServiceImpl(store);
+
+        assertEquals("OK 1.5", storeService.create(1, -100, "1.5"));
+    }
+
+    @Test(expected = Exception.class)
+    public void validateInputWrongObservationException() throws Exception {
+        Store store = new InMemoryHistoryStore();
+        DataStoreService storeService = new DataStoreServiceImpl(store);
+
+        assertEquals("OK 1.5", storeService.create(-1, 100, "1  .5"));
+    }
 
     @Test
     public void interactionExample() throws Exception {
