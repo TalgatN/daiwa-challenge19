@@ -1,6 +1,5 @@
 package challenge.service;
 
-import challenge.entity.Data;
 import challenge.repository.Store;
 
 import java.util.regex.Matcher;

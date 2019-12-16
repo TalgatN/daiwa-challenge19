@@ -1,7 +1,5 @@
 package challenge.repository;
 
-import challenge.entity.Data;
-
 public interface Store {
     void create(Integer id, Integer timeStamp, String observation) throws Exception;
     String update(Integer id, Integer timeStamp, String observation) throws Exception;
